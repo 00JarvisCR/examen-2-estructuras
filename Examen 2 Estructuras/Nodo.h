@@ -10,9 +10,9 @@ class Nodo {
 public:
 	string nombre; //nombre de el lugar (Alajuela - San Ramon - Grecia - ...)
 	
-	Nodo* sig; // siguiente
-	Nodo* sec; // siguiente secundario
-	Nodo* ant; // anterior
+	Nodo* sig; // siguiente (izquierda)
+	Nodo* sec; // siguiente secundario (derecha)
+	Nodo* ant; // anterior (padre)
 	
 	int distancia_sig; // distancia del siguiente
 	int distancia_sec; // distancia del siguiente secundario

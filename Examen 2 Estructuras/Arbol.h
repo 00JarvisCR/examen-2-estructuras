@@ -5,18 +5,20 @@
 
 class Arbol {
 public:
-	Nodo* Alajuela;
-	Nodo* Rio_Segundo;
+	Nodo* Alajuela = nullptr;
+	Nodo* Rio_Segundo = nullptr;
 	
-	Nodo* Heredia;
-	Nodo* San_Jose;
-	Nodo* Curridabat;
-	Nodo* Cartago;
+	Nodo* Heredia = nullptr;
+	Nodo* San_Jose = nullptr;
+	Nodo* Curridabat = nullptr;
+	Nodo* Cartago = nullptr;
 	
-	Nodo* San_Ramon;
-	Nodo* Palmares;
-	Nodo* Naranjo;
-	Nodo* Grecia;
+	Nodo* San_Ramon = nullptr;
+	Nodo* Palmares = nullptr;
+	Nodo* Naranjo = nullptr;
+	Nodo* Grecia = nullptr;
+	
+	string ver_nodos();
 	
 	Arbol();
 	~Arbol();

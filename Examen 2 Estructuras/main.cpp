@@ -9,16 +9,16 @@ int main () {
 	
 	do{
 		
-		cout << "============= Menu Principal =============" << endl;
+		cout << "\n============= Menu Principal =============" << endl;
 		cout << "1. Registrarse" << endl;
-		cout << "2. Loguearse ---> se necesita registrar primero, probar ID = 999" << endl;
+		cout << "2. Loguearse" << endl;
 		cout << "3. Salir\n" << endl;
 		
 		int opc;
 		
 		opc = Utilidades::in_int("Ingrese una opcion: ", 1, 3);
 		
-		if(opc == 1) { sis.Registrarse(); }
+		if(opc == 1) { Utilidades::limpiar(); sis.Registrarse(); }
 		if(opc == 2) { sis.loguearse(); }
 		if(opc == 3) { break; }
 		

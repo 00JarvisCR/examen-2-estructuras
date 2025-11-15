@@ -6,6 +6,7 @@
 #include "ListaUsuarios.h"
 #include "Arbol.h"
 #include "Utilidades.h"
+#include "Archivos.h"
 
 class Sistema {
 public:

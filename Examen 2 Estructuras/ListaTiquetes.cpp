@@ -7,27 +7,30 @@ ListaTiquetes::ListaTiquetes() {
 
 void ListaTiquetes::ordenar_fecha_hora(){
 	// implementar
+	// ordena la lista por fecha y hora
 }
 
 void ListaTiquetes::ordenar_monto() {
 	// implementar
+	// ordena la lista por monto
 }
 
 void ListaTiquetes::ordenar_estacion() {
 	// implementar
+	// ordena la lista por estacion
 }
 
 string ListaTiquetes::listar(){
 	//implementar
-	string lista = "lista completa";
+	string lista = "lista completa ordenada. (implementar en ListaTiquetes)\n";
 	
 	return lista;
 }
 
 string ListaTiquetes::compradosXusuario(int id_usuario) {
 	// implementar
-	string lista = "lista de este usuario";
-		
+	string lista = "lista de este usuario (implementar en ListaTiquetes)\n";
+	
 	return lista;
 }
 

@@ -1,9 +1,9 @@
 #include "Sistema.h"
 
 Sistema::Sistema() {
-//	this->arbol = Arbol();
-	this->tiquetes = ListaTiquetes(); // aqui se deberia implementar archivos para cargar (tiquetes.txt)
-	this->usuarios = ListaUsuarios(); // aqui se deberia implementar archivos para cargar (usuario.txt)
+	//	this->arbol = Arbol();
+	this->tiquetes = Archivos::CargarTiquetes(); // aqui se deberia implementar archivos para cargar (tiquetes.txt)
+	this->usuarios = Archivos::CargarUsuarios(); // aqui se deberia implementar archivos para cargar (usuario.txt)
 }
 
 int Sistema::buscar_ruta(Nodo* actual, Nodo* destino, Nodo* anterior, int distancia_acumulada) {
@@ -41,7 +41,7 @@ int Sistema::buscar_ruta(Nodo* actual, Nodo* destino, Nodo* anterior, int distan
 	
 	return -1; // No se encontró ruta desde este nodo
 }
-	
+
 int Sistema::calcular_distancia(Nodo* origen, Nodo* destino) {
 	if (origen == nullptr || destino == nullptr || origen == destino) {
 		return 0;
@@ -70,13 +70,10 @@ char Sistema::calcular_tipo_descuento(Usuario* usuario) {
 
 void Sistema::Registrarse() {
 	crear_usuario();
+	Archivos::GuardarUsuarios(usuarios);
 }
 
 void Sistema::loguearse() {
-	
-	Usuario* Jeremy = new Usuario(999, "Jeremy", 19, 10000, 1);
-	usuarios.lista.push_back(Jeremy);
-	
 	int id = Utilidades::in_int("Ingresa tu ID: ");
 	
 	Usuario* usuario = usuarios.buscarXid(id);
@@ -99,7 +96,7 @@ void Sistema::loguearse() {
 		cout << "3. Ver Tiquetes" << endl;
 		cout << "4. Recargar Saldo" << endl;
 		cout << "5. Salir\n" << endl;
-
+		
 		int opc = Utilidades::in_int("Ingresa la opcion deseada: ", 1, 5);
 		if (opc == 1) { Utilidades::limpiar(); comprarTiquete(usuario); }
 		else if (opc == 2) { Utilidades::limpiar(); abordarTren(usuario); }
@@ -115,6 +112,7 @@ void Sistema::loguearse() {
 
 void Sistema::comprarTiquete(Usuario* usuario){
 	crear_tiquete(usuario);
+	Archivos::GuardarTiquetes(tiquetes);
 }
 
 void Sistema::abordarTren(Usuario* usuario){
@@ -128,6 +126,8 @@ void Sistema::abordarTren(Usuario* usuario){
 		if (usuario->id == tiquete->get_id_usuario() and !tiquete->get_esta_utilizado()){
 			tiquete->set_esta_utilizado(true);
 			cout << "\nBus abordado correctamente" << endl;
+			cout << "\n====== TIQUETE USADO ======" << endl;
+			cout << tiquete->to_string();
 		}
 		else if(usuario->id == tiquete->get_id_usuario() and tiquete->get_esta_utilizado()){
 			cout << "\nEste tiquete ya ha sido utilizado" << endl;
@@ -138,8 +138,8 @@ void Sistema::abordarTren(Usuario* usuario){
 	}
 	else{
 		cout << "\nNo se encontro este tiquete" << endl;
-		return;
 	}
+	Archivos::GuardarTiquetes(tiquetes);
 }
 
 void Sistema::verTiquetes(Usuario* usuario) {
@@ -147,7 +147,7 @@ void Sistema::verTiquetes(Usuario* usuario) {
 		cout << "=========== Vista De Tiquetes ===========" << endl;
 		cout << "1. Ver mis tiquetes" << endl;
 		cout << "2. Ver tiquetes ordenados por fecha/hora" << endl;
-		cout << "3. Ver tiquetes ordenados por mondo" << endl;
+		cout << "3. Ver tiquetes ordenados por monto" << endl;
 		cout << "4. Ver tiquetes ordenados por estacion" << endl;
 		cout << "5. Salir\n " << endl;
 		
@@ -333,50 +333,74 @@ void Sistema::crear_tiquete(Usuario* usuario){
 	}
 	
 }
-	
-	
+
+
 
 
 void Sistema::recargarSaldo(Usuario* usuario) {
-	// implementar
-	cout << "implementar" << endl;
+	cout << "=================== Recargas ===================" << endl;
+	float saldo = Utilidades::in_float("Ingrese el saldo que quiera ingresar a su cuenta: ", 0 , 999999999999999999);
 	
-	// pide cuanta plata quiere y se le suma al usuario
+	usuario->saldo += saldo;
+	
+	cout << "\nSaldo agregado correctamente" << endl;
+	Archivos::GuardarUsuarios(usuarios);
 }
 
 void Sistema::crear_usuario(){
-	// implementar
-	cout << "implementar" << endl;
+	cout << "=================== Registro ===================" << endl;
+	int id;
 	
-	// pide los datos necesarios y crea al usuario
+	do{
+		id = Utilidades::in_int("Ingrese su id: ");
+		
+		Usuario* existe = usuarios.buscarXid(id);
+		
+		
+		if(!existe){
+			break;
+		}
+		else {
+			cout << "Este id ya existe, escoja uno distinto" << endl;
+		}
+	} while(true);
+
+	
+	string nombre = Utilidades::in_string("Ingrese su nombre: ");
+	int edad = Utilidades::in_int("Ingrese su edad: ", 5, 122);
+	
+	cout << "Seleccione su oficio: " << endl;
+	cout << "1. Ninguno" << endl;
+	cout << "2. Estudiante" << endl;
+	cout << "3. Funcionario publico\n" << endl;
+	
+	int oficio = Utilidades::in_int("Ingrese su opcion: ", 1, 3) - 1;
+	
+	Usuario* usuario = new Usuario(id, nombre, edad, 0, oficio);
+	
+	usuarios.lista.push_back(usuario);
+	
+	cout << "\nUsuario registrado con exito" << endl;
+
 }
 
 void Sistema::ver_compradosXusuario(int id_usuario){
-	//implementar
-	cout << "implementar" << endl;
-	
-	// usa el metodo de la ListaTiquetes
+	cout << tiquetes.compradosXusuario(id_usuario);
 }
 
 void Sistema::ver_ordenadorXfecha_hora() {
-	// implementar
-	cout << "implementar" << endl;
-	
-	// usa el metodo de la ListaTiquetes
+	tiquetes.ordenar_fecha_hora(); // ordena la lista por fecha y hora
+	cout << tiquetes.listar(); //muestra toda la lista
 }
 
 void Sistema::ver_ordenadoXmonto() {
-	// implementar
-	cout << "implementar" << endl;
-	
-	// usa el metodo de la ListaTiquetes
+	tiquetes.ordenar_monto(); // ordena por monto
+	cout << tiquetes.listar(); // muestra toda la lista
 }
 
 void Sistema::ver_ordenadoXestacion() {
-	// implementar
-	cout << "implementar" << endl;
-	
-	// usa el metodo de la ListaTiquetes
+	tiquetes.ordenar_estacion();
+	cout << tiquetes.listar();
 }
 
 

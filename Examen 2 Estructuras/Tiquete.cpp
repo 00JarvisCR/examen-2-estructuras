@@ -82,6 +82,7 @@ string Tiquete::to_string() {
 	oss << "Hora de compra:     " << hora[0] << ":" << hora[1] << endl;
 	oss << "Precio base:        " << this->precio_base << " CRC" << endl;
 	oss << "Descuento:          " << this->descuento * 100 << "%" << endl;
+	oss << "IVA:                13%\n";
 	oss << "Precio final:       " << this->precio_final << " CRC" << endl;
 	oss << "Estado:             " << estado << endl;
 	

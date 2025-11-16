@@ -1,1 +1,8 @@
-// Archivo de tiquetes
+1,8,600,0,678,Jeremy,1,Alajuela,Rio Segundo,1,2025/11/16,12:50
+2,106,7950,0,8983.5,Jeremy,1,Heredia,Grecia,1,2025/11/16,12:55
+3,0,0,0,0,Jeremy,1,Alajuela,Alajuela,1,2025/11/16,12:57
+4,26,1950,0.15,1872.97,Pedro,2,San Jose,Cartago,1,2025/11/16,12:58
+5,9,675,0.15,648.338,Pedro,2,Palmares,Naranjo,1,2025/11/16,12:58
+6,31,2325,0.15,2233.16,Pedro,2,Grecia,San Ramon,1,2025/11/16,12:59
+7,7,525,0.15,504.263,Pedro,2,San Jose,Curridabat,1,2025/11/16,12:59
+8,75,5625,0.15,5402.81,Pedro,2,San Ramon,Heredia,1,2025/11/16,12:59

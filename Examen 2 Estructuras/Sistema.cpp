@@ -146,20 +146,26 @@ void Sistema::verTiquetes(Usuario* usuario) {
 	do{
 		cout << "=========== Vista De Tiquetes ===========" << endl;
 		cout << "1. Ver mis tiquetes" << endl;
-		cout << "2. Ver tiquetes ordenados por fecha/hora" << endl;
-		cout << "3. Ver tiquetes ordenados por monto" << endl;
-		cout << "4. Ver tiquetes ordenados por estacion" << endl;
-		cout << "5. Salir\n " << endl;
+		cout << "2. Ver cantidad de tiquetes vendidos por estacion de origen o destino" << endl;
+		cout << "3. Ver tiquetes ordenados por fecha/hora" << endl;
+		cout << "4. Ver tiquetes ordenados por monto" << endl;
+		cout << "5. Ver tiquetes ordenados por estacion" << endl;
+		cout << "6. Salir\n " << endl;
 		
 		int opc;
 		do {
-			opc = Utilidades::in_int("Ingrese una opcion correspondiente: ", 1, 5);
+			opc = Utilidades::in_int("Ingrese una opcion correspondiente: ", 1, 6);
+			
+			if (opc != 6) {
+				Utilidades::limpiar();
+			}
 			
 			if (opc == 1) { ver_compradosXusuario(usuario->id); break; }
-			else if (opc == 2) { ver_ordenadorXfecha_hora(); break;}
-			else if (opc == 3) { ver_ordenadoXmonto(); break; }
-			else if (opc == 4) { ver_ordenadoXestacion(); break; }
-			else if (opc == 5) { return; }
+			else if (opc == 2) { vendidosXestacion(); break; }
+			else if (opc == 3) { ver_ordenadorXfecha_hora(); break;}
+			else if (opc == 4) { ver_ordenadoXmonto(); break; }
+			else if (opc == 5) { ver_ordenadoXestacion(); break; }
+			else if (opc == 6) { return; }
 			else { cout << "\nIngrese una opcion valida\n"; }
 			
 		} while(true);
@@ -401,6 +407,64 @@ void Sistema::ver_ordenadoXmonto() {
 void Sistema::ver_ordenadoXestacion() {
 	tiquetes.ordenar_estacion();
 	cout << tiquetes.listar();
+}
+
+void Sistema::vendidosXestacion() {
+	int or_alajuela = 0, des_alajuela = 0;
+	int or_rio_segundo = 0, des_rio_segundo = 0;
+	int or_heredia = 0, des_heredia = 0;
+	int or_san_jose = 0, des_san_jose = 0;
+	int or_curridabat = 0, des_curridabat = 0;
+	int or_cartago = 0, des_cartago = 0;
+	int or_san_ramon = 0, des_san_ramon = 0;
+	int or_palmares = 0, des_palmares = 0;
+	int or_naranjo = 0, des_naranjo = 0;
+	int or_grecia = 0, des_grecia = 0;
+	
+	for(Tiquete* tiquete: tiquetes.lista){
+		if(tiquete->get_origen() == "Alajuela") { or_alajuela++; }
+		if(tiquete->get_destino() == "Alajuela") { des_alajuela++; }
+		
+		if(tiquete->get_origen() == "Rio Segundo") { or_rio_segundo++; }
+		if(tiquete->get_destino() == "Rio Segundo") { des_rio_segundo++; }
+		
+		if(tiquete->get_origen() == "Heredia") { or_heredia++; }
+		if(tiquete->get_destino() == "Heredia") { des_heredia++; }
+		
+		if(tiquete->get_origen() == "San Jose") { or_san_jose++; }
+		if(tiquete->get_destino() == "San Jose") { des_san_jose++; }
+		
+		if(tiquete->get_origen() == "Curridabat") { or_curridabat++; }
+		if(tiquete->get_destino() == "Curridabat") { des_curridabat++; }
+		
+		if(tiquete->get_origen() == "Cartago") { or_cartago++; }
+		if(tiquete->get_destino() == "Cartago") { des_cartago++; }
+		
+		if(tiquete->get_origen() == "San Ramon") { or_san_ramon++; }
+		if(tiquete->get_destino() == "San Ramon") { des_san_ramon++; }
+		
+		if(tiquete->get_origen() == "Palmares") { or_palmares++; }
+		if(tiquete->get_destino() == "Palmares") { des_palmares++; }
+		
+		if(tiquete->get_origen() == "Naranjo") { or_naranjo++; }
+		if(tiquete->get_destino() == "Naranjo") { des_naranjo++; }
+		
+		if(tiquete->get_origen() == "Grecia") { or_grecia++; }
+		if(tiquete->get_destino() == "Grecia") { des_grecia++; }
+	}
+	
+	cout << "   Distribuicion de ventas de tiquetes de origen y destino" << endl;
+	cout << "=============================================================" << endl;
+	cout << "Alajuela    --> Origen: " << or_alajuela << "\tDestino: " << des_alajuela << endl;
+	cout << "Rio Segundo --> Origen: " << or_rio_segundo << "\tDestino: " << des_rio_segundo << endl;
+	cout << "Heredia     --> Origen: " << or_heredia << "\tDestino: " << des_heredia << endl;
+	cout << "San Jose    --> Origen: " << or_san_jose << "\tDestino: " << des_san_jose << endl;
+	cout << "Curridabat  --> Origen: " << or_curridabat << "\tDestino: " << des_curridabat << endl;
+	cout << "Cartago     --> Origen: " << or_cartago << "\tDestino: " << des_cartago << endl;
+	cout << "San Ramon   --> Origen: " << or_san_ramon << "\tDestino: " << des_san_ramon << endl;
+	cout << "Palmares    --> Origen: " << or_palmares << "\tDestino: " << des_palmares << endl;
+	cout << "Naranjo     --> Origen: " << or_naranjo << "\tDestino: " << des_naranjo << endl;
+	cout << "Grecia      --> Origen: " << or_grecia << "\tDestino: " << des_grecia << endl;
 }
 
 

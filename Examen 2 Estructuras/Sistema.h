@@ -14,6 +14,7 @@ public:
 	
 	int calcular_distancia(Nodo* origen, Nodo* destino); // retorna la distancia total entre el punto de origen y el punto de destino
 	char calcular_tipo_descuento(Usuario* usario); // devuelve 'a', 'b', 'c' dependiendo de la edad o el oficio del usuario
+	void vendidosXestacion();
 	
 	
 	//==================================================================================================================================

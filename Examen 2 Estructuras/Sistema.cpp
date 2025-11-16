@@ -320,6 +320,11 @@ void Sistema::crear_tiquete(Usuario* usuario){
 	
 	int distancia = calcular_distancia(origen_nodo, destino_nodo);
 	
+	if(distancia == 0) {
+		cout << "\nLos lugares de origen y destino tienen que ser distintos" << endl;
+		return;
+	}
+	
 	Tiquete* tiquete =  new Tiquete(codigo, distancia, tipo, nombre_usuario, id_usuario, origen_nodo->nombre, destino_nodo->nombre);
 	
 	if(usuario->saldo < tiquete->get_precio_final()) {
